@@ -4,4 +4,18 @@
 TAGS
 db/schema.rb
 log/
+
+.bak
+.bundle
 db/*.sqlite3
+log/*.log
+tmp/
+docs/
+
+# Ignore other unneeded files.
+doc/
+*.swp
+*~
+.project
+.DS_Store
+.settings/
