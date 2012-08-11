@@ -27,31 +27,22 @@ Given /I (un)?check the following ratings: (.*)$/ do |uncheck, rating_list|
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
   rating_list.gsub(/(,|and)/, "").split.each do |rating|
     if uncheck
-      uncheck("ratings_#{rating}")  
+      step %Q{I uncheck "ratings_#{rating}"}  
     else
-      check("ratings_#{rating}")
+      step %Q{I check "ratings_#{rating}"}
     end
   end
 end
 
 Then /^I should (not )?see movies rated: (.*)$/ do |should_not_see, rating_list|
   
-  rating_list.gsub(/(,|and)/, "").split.each do |rating|
-      
+  rating_list.gsub(/(,|and)/, "").split.each do |rating|      
     movies = Movie.where("rating = ?", rating)
     movies.each do |movie|
       if should_not_see
-        if page.respond_to? :should
-          page.should have_no_content(movie.title)
-        else
-          assert page.has_no_content?(movie.title)
-        end
+        step %Q{I should not see "#{movie.title}"}
       else
-        if page.respond_to? :should
-          page.should have_content(movie.title)
-        else
-          assert page.has_content?(movie.title)
-        end
+        step %Q{I should see "#{movie.title}"}
       end
     end
   end
