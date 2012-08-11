@@ -38,3 +38,4 @@ gem 'jquery-rails'
 
 # To use debugger
 gem 'haml'
+gem 'json', '1.6.5'
