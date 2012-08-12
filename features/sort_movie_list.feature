@@ -20,12 +20,17 @@ Background: movies have been added to database
   | Chicken Run             | G      | 21-Jun-2000  |
 
   And I am on the RottenPotatoes home page
+  And I check all ratings
+  And I press "Refresh"
+
 
 Scenario: sort movies alphabetically
   When I follow "Movie Title"
-  # your steps here
+  Then I should see "Aladdin" before "Amelie"
+  And I should not see "The Terminator" before "The Incredibles"
 
 Scenario: sort movies in increasing order of release date
-  When i follow "Release Date"
-  # your steps here
+  When I follow "Release Date"
+  Then I should see "Raiders of the Lost Ark" before "The Terminator"
+  And I should not see "Chocolat" before "Chicken Run"
 
