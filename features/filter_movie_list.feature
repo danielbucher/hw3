@@ -21,7 +21,6 @@ Background: movies have been added to database
 
   And  I am on the RottenPotatoes home page
 
-@focus  
 Scenario: restrict to movies with 'PG' or 'R' ratings
   Given I check the following ratings: PG, R
   And I uncheck the following ratings: G, PG-13, NC-17
@@ -30,7 +29,11 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I should not see movies rated: G, PG-13 and NC-17
 
 Scenario: no ratings selected
-  # see assignment
+  Given I uncheck all ratings
+  When I press "Refresh"
+  Then I should not see any movie
 
 Scenario: all ratings selected
-  # see assignment
+  Given I check all ratings
+  When I press "Refresh"
+  Then I should see all movies

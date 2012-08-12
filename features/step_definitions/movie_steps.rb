@@ -46,5 +46,22 @@ Then /^I should (not )?see movies rated: (.*)$/ do |should_not_see, rating_list|
       end
     end
   end
+end
 
+Given /^I (un)?check all ratings$/ do |uncheck|
+  Movie.all_ratings.each do |rating|
+    if uncheck
+      step %Q{I uncheck "ratings_#{rating}"}
+    else
+      step %Q{I check "ratings_#{rating}"}
+    end
+  end  
+end
+
+Then /^I should see all movies$/ do
+  page.all('tbody#movielist tr').count.should == Movie.count
+end
+
+Then /^I should not see any movie$/ do
+  page.all('tbody#movielist tr').count.should == 0
 end
